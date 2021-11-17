@@ -50,13 +50,19 @@ public class GetEmployeeServlet extends HttpServlet {
 			out.print("<th>" + e.getCountry() + "</th>");
 			out.print("</tr>");
 			out.print("</tbody>");
+			out.print("</table>");
+			out.print("</div>");
 		} catch (SQLException e1) {
 			e1.printStackTrace();
-		} catch (Exception e2) {
+			out.print("<p>There was an error retrieving employee</p>");
+		} catch (IndexOutOfBoundsException e2) {
 			e2.printStackTrace();
+			out.print("<p>There was an error retrieving employee</p>");
+			out.print("<p>There is no employee named: " + request.getParameter("name") + "</p>");
+		} catch (Exception e3) {
+			e3.printStackTrace();
+			out.print("<p>There was an error retrieving employee</p>");
 		}
-		out.print("</table>");
-		out.print("</div>");
 		out.print("</div>");
 		out.print("<div class=\"col-lg-3\"></div>");
 		out.print("</div>");

@@ -53,13 +53,15 @@ public class ListEmployeesServlet extends HttpServlet {
 				out.print("</tr>");
 			}
 			out.print("</tbody>");
+			out.print("</table>");
+			out.print("</div>");
 		} catch (SQLException e1) {
 			e1.printStackTrace();
+			out.print("<p>There was an error retrieving employees</p>");
 		} catch (Exception e2) {
 			e2.printStackTrace();
+			out.print("<p>There was an error retrieving employees</p>");
 		}
-		out.print("</table>");
-		out.print("</div>");
 		out.print("</div>");
 		out.print("<div class=\"col-lg-3\"></div>");
 		out.print("</div>");

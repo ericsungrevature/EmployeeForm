@@ -23,6 +23,11 @@ public class UpdateEmployeeServlet extends HttpServlet {
 		out.println("<br>");
 		request.getRequestDispatcher("update.html").include(request, response);
 		EmployeeDao dao = EmployeeDaoFactory.getEmployeeDao();
+		out.println("<br>");
+		out.print("<div class=\"container\">");
+		out.print("<div class=\"row\">");
+		out.print("<div class=\"col-lg-3\"></div>");
+		out.print("<div class=\"col-lg-6\">");
 		Employee e = new Employee();
 		e.setName(request.getParameter("name"));
 		e.setEmail(request.getParameter("email"));
@@ -30,11 +35,22 @@ public class UpdateEmployeeServlet extends HttpServlet {
 		e.setCountry(request.getParameter("country"));
 		try {
 			dao.updateEmployee(e);
+			out.print("<p>Employee updated successfully</p>");
 		} catch (SQLException e1) {
 			e1.printStackTrace();
-		} catch (Exception e2) {
+			out.print("<p>There was an error updating employee</p>");
+		} catch (IndexOutOfBoundsException e2) {
 			e2.printStackTrace();
+			out.print("<p>There was an error updating employee</p>");
+			out.print("<p>There is no employee named: " + e.getName() + "</p>");
+		} catch (Exception e3) {
+			e3.printStackTrace();
+			out.print("<p>There was an error updating employee</p>");
 		}
+		out.print("</div>");
+		out.print("<div class=\"col-lg-3\"></div>");
+		out.print("</div>");
+		out.print("</div>");
 		out.close();
 	}
 
